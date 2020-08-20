@@ -1,0 +1,6 @@
+framework module Pods_SurfingSpots_SurfingSpotsUITests {
+  umbrella header "Pods-SurfingSpots-SurfingSpotsUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
