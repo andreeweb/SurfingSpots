@@ -18,17 +18,23 @@ struct CitiesView: View {
         UITableView.appearance().separatorStyle = .none
                 
         return ZStack {
-            
+                        
             NavigationView {
                 List(viewModel.cities) { data in
                     CityRow(city: data)
                 }.navigationBarTitle(Text("Surfing Spots"))
-                    .foregroundColor(Color.gray)
+                .foregroundColor(Color.gray)
+                .navigationBarItems(trailing:
+                    ActivityIndicator(isAnimating: .constant(true),
+                                      color: .constant(UIColor.gray),
+                                      style: .medium)
+                )
             }.onAppear {
                 self.viewModel.getCities()
             }
             
             ActivityIndicator(isAnimating: .constant(viewModel.loading),
+                              color: .constant(UIColor.gray),
                               style: .large)
         }
     }

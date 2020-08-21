@@ -207,9 +207,9 @@
 		1D10323024EFB4E300E73D93 /* Cities */ = {
 			isa = PBXGroup;
 			children = (
+				1D10323324EFB7E200E73D93 /* CityRow.swift */,
 				1D59ECEB24EE7AE800765B89 /* CitiesView.swift */,
 				1D10323124EFB61400E73D93 /* CitiesViewModel.swift */,
-				1D10323324EFB7E200E73D93 /* CityRow.swift */,
 			);
 			path = Cities;
 			sourceTree = "<group>";
