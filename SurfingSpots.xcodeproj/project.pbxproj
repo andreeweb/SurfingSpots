@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D10320D24EEB01500E73D93 /* HTTPServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D10320C24EEB01500E73D93 /* HTTPServiceProtocol.swift */; };
+		1D10320F24EEB02200E73D93 /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D10320E24EEB02200E73D93 /* HTTPService.swift */; };
+		1D10321224EEB0C400E73D93 /* HTTPServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D10321124EEB0C400E73D93 /* HTTPServiceResponse.swift */; };
+		1D10321424EEB0F700E73D93 /* HTTPServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D10321324EEB0F700E73D93 /* HTTPServiceError.swift */; };
+		1D10321624EEC78A00E73D93 /* HTTPServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D10321524EEC78A00E73D93 /* HTTPServiceTests.swift */; };
+		1D10321A24EEDD4400E73D93 /* HTTPServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D10321824EEDAB500E73D93 /* HTTPServiceMock.swift */; };
 		1D59ECE824EE7AE800765B89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D59ECE724EE7AE800765B89 /* AppDelegate.swift */; };
 		1D59ECEA24EE7AE800765B89 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D59ECE924EE7AE800765B89 /* SceneDelegate.swift */; };
 		1D59ECEC24EE7AE800765B89 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D59ECEB24EE7AE800765B89 /* ContentView.swift */; };
@@ -40,6 +46,12 @@
 /* Begin PBXFileReference section */
 		064ED41C88C140AF5B962DEE /* Pods_SurfingSpots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurfingSpots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1821A5527CF6CFEA180C40A7 /* Pods-SurfingSpotsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurfingSpotsTests.release.xcconfig"; path = "Target Support Files/Pods-SurfingSpotsTests/Pods-SurfingSpotsTests.release.xcconfig"; sourceTree = "<group>"; };
+		1D10320C24EEB01500E73D93 /* HTTPServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServiceProtocol.swift; sourceTree = "<group>"; };
+		1D10320E24EEB02200E73D93 /* HTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
+		1D10321124EEB0C400E73D93 /* HTTPServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServiceResponse.swift; sourceTree = "<group>"; };
+		1D10321324EEB0F700E73D93 /* HTTPServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServiceError.swift; sourceTree = "<group>"; };
+		1D10321524EEC78A00E73D93 /* HTTPServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServiceTests.swift; sourceTree = "<group>"; };
+		1D10321824EEDAB500E73D93 /* HTTPServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServiceMock.swift; sourceTree = "<group>"; };
 		1D59ECE424EE7AE800765B89 /* SurfingSpots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SurfingSpots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D59ECE724EE7AE800765B89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D59ECE924EE7AE800765B89 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +103,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D10320A24EEAFED00E73D93 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1D10320B24EEAFFC00E73D93 /* HTTPService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1D10320B24EEAFFC00E73D93 /* HTTPService */ = {
+			isa = PBXGroup;
+			children = (
+				1D10321024EEB0BC00E73D93 /* Entities */,
+				1D10320C24EEB01500E73D93 /* HTTPServiceProtocol.swift */,
+				1D10320E24EEB02200E73D93 /* HTTPService.swift */,
+				1D10321324EEB0F700E73D93 /* HTTPServiceError.swift */,
+			);
+			path = HTTPService;
+			sourceTree = "<group>";
+		};
+		1D10321024EEB0BC00E73D93 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				1D10321124EEB0C400E73D93 /* HTTPServiceResponse.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		1D10321724EEDA9700E73D93 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				1D10321824EEDAB500E73D93 /* HTTPServiceMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		1D59ECDB24EE7AE800765B89 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +163,8 @@
 		1D59ECE624EE7AE800765B89 /* SurfingSpots */ = {
 			isa = PBXGroup;
 			children = (
+				1D10320A24EEAFED00E73D93 /* Services */,
+				1D10321724EEDA9700E73D93 /* Mocks */,
 				1D59ECE724EE7AE800765B89 /* AppDelegate.swift */,
 				1D59ECE924EE7AE800765B89 /* SceneDelegate.swift */,
 				1D59ECEB24EE7AE800765B89 /* ContentView.swift */,
@@ -140,6 +189,7 @@
 			children = (
 				1D59ECFE24EE7AE900765B89 /* SurfingSpotsTests.swift */,
 				1D59ED0024EE7AE900765B89 /* Info.plist */,
+				1D10321524EEC78A00E73D93 /* HTTPServiceTests.swift */,
 			);
 			path = SurfingSpotsTests;
 			sourceTree = "<group>";
@@ -379,9 +429,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D10320F24EEB02200E73D93 /* HTTPService.swift in Sources */,
 				1D59ECE824EE7AE800765B89 /* AppDelegate.swift in Sources */,
 				1D59ECEA24EE7AE800765B89 /* SceneDelegate.swift in Sources */,
+				1D10321A24EEDD4400E73D93 /* HTTPServiceMock.swift in Sources */,
 				1D59ECEC24EE7AE800765B89 /* ContentView.swift in Sources */,
+				1D10321224EEB0C400E73D93 /* HTTPServiceResponse.swift in Sources */,
+				1D10320D24EEB01500E73D93 /* HTTPServiceProtocol.swift in Sources */,
+				1D10321424EEB0F700E73D93 /* HTTPServiceError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D59ECFF24EE7AE900765B89 /* SurfingSpotsTests.swift in Sources */,
+				1D10321624EEC78A00E73D93 /* HTTPServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
