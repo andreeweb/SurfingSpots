@@ -19,13 +19,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = CitiesView()
-
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            if !areTestsRunning() {
+                
+                // Create and inject the ViewModel
+                let httpService = HTTPService()
+                let cityService = CityService(httpService: httpService)
+                let viewModel = CitiesViewModel(cityService: cityService)
+                
+                // Create the SwiftUI view that provides the window contents.
+                let contentView = CitiesView(viewModel: viewModel)
+                window.rootViewController = UIHostingController(rootView: contentView)
+            }
             self.window = window
             window.makeKeyAndVisible()
         }
@@ -59,6 +66,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
+    // https://www.davidahouse.com/2020-05-04-limit-scenedelegate-work-for-tests-and-previews/
+    private func areTestsRunning() -> Bool {
+        return NSClassFromString("XCTest") != nil
+    }
 }
 

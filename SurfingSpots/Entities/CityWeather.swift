@@ -14,6 +14,6 @@ struct CityWeather: Identifiable {
     var id = UUID()
     let name: String
     let image: UIImage
-    let temperature: Float
+    var temperature: Float
     let weather: WeatherCondition
 }

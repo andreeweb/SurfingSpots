@@ -10,43 +10,32 @@ import SwiftUI
 
 struct CitiesView: View {
     
+    @ObservedObject var viewModel: CitiesViewModel
+    
     var body: some View {
         
+        // Style setup for the view
         UITableView.appearance().separatorStyle = .none
-
-        let name = "Cuba"
-        let image = #imageLiteral(resourceName: "test-image-city")
-        let temperature: Float = 28.8
-        let weather = WeatherCondition.Cloudy
-        
-        let city = CityWeather(name: name,
-                               image: image,
-                               temperature: temperature,
-                               weather: weather)
-        
-        let city2 = CityWeather(name: name,
-                                image: image,
-                                temperature: temperature,
-                                weather: weather)
-        
-        let city3 = CityWeather(name: name,
-                                image: image,
-                                temperature: temperature,
-                                weather: weather)
-        
-        let modelData = [city, city2, city3]
-        
-        return NavigationView {
-            List(modelData) { data in
-                CityRow(city: data)
-            }.navigationBarTitle(Text("Surfing Spots"))
-            .foregroundColor(Color.gray)
+                
+        return ZStack {
+            
+            NavigationView {
+                List(viewModel.cities) { data in
+                    CityRow(city: data)
+                }.navigationBarTitle(Text("Surfing Spots"))
+                    .foregroundColor(Color.gray)
+            }.onAppear {
+                self.viewModel.getCities()
+            }
+            
+            ActivityIndicator(isAnimating: .constant(viewModel.loading),
+                              style: .large)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        CitiesView()
+        CitiesView(viewModel: CitiesViewModel(cityService: CityServiceMock()))
     }
 }
