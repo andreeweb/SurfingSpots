@@ -9,7 +9,16 @@
 import Foundation
 import Combine
 
+enum JSONType {
+    case JSONError
+    case CitiesJson
+}
+
 class HTTPServiceMock: HTTPServiceProtocol {
+    
+    /// Used for select the mock json response
+    var jsonType: JSONType?
+    var validHTTPConnection: Bool = true
     
     func makeHttpRequest(endpoint: String) -> AnyPublisher<HTTPServiceResponse, HTTPServiceError> {
         
@@ -17,25 +26,36 @@ class HTTPServiceMock: HTTPServiceProtocol {
             return Fail(error: HTTPServiceError.HTTPEndpointNotValid).eraseToAnyPublisher()
         }
         
-        let jsonData: Data? = """
-                {
-                    "cities": [{
-                        "name": "Cuba"
-                    }, {
-                        "name": "Los Angeles"
-                    }, {
-                        "name": "Miami"
-                    }, {
-                        "name": "Porto"
-                    }, {
-                        "name": "Ortona"
-                    }, {
-                        "name": "Riccione"
-                    }, {
-                        "name": "Midgar"
-                    }]
-                }
-                """.data(using: .utf8)
+        if !validHTTPConnection {
+            return Fail(error: HTTPServiceError.HTTPRequestError(reason: "Mock error")).eraseToAnyPublisher()
+        }
+        
+        var jsonData: Data? = "".data(using: .utf8)
+        
+        switch jsonType! {
+        case .CitiesJson:
+            jsonData = """
+            {
+                "cities": [{
+                    "name": "Cuba"
+                }, {
+                    "name": "Los Angeles"
+                }, {
+                    "name": "Miami"
+                }, {
+                    "name": "Porto"
+                }, {
+                    "name": "Ortona"
+                }, {
+                    "name": "Riccione"
+                }, {
+                    "name": "Midgar"
+                }]
+            }
+            """.data(using: .utf8)
+        case .JSONError:
+            jsonData = "{]".data(using: .utf8)
+        }
         
         return Just(HTTPServiceResponse(data: jsonData!))
             .setFailureType(to: HTTPServiceError.self)
