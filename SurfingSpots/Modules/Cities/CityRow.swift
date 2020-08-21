@@ -40,7 +40,7 @@ struct CityRow: View {
                 maxWidth: .infinity,
                 minHeight: 0,
                 maxHeight: 200.0)
-        .padding()
+            .padding(.bottom, 5)
 
     }
 }

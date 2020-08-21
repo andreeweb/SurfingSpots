@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 
-struct CityWeather {
+struct CityWeather: Identifiable {
     
+    var id = UUID()
     let name: String
     let image: UIImage
     let temperature: Float
