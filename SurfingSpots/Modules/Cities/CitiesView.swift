@@ -24,22 +24,22 @@ struct CitiesView: View {
                 if viewModel.showError {
                 
                     VStack{
-                        Text("Error")
+                        Text(LocalizedStringKey("data_not_available"))
                         Spacer().frame(height: 15)
                         Button(action: {
                             self.viewModel.getCities()
                         }){
-                            Text("Tap Here")
+                            Text(LocalizedStringKey("tap_to_try_again"))
                         }
                     }
-                    .navigationBarTitle(Text("Surfing Spots"))
+                    .navigationBarTitle(Text(LocalizedStringKey("app_name_navigation_bar")))
                     
                 } else {
                     
                     List(viewModel.cities) { data in
                         CityRow(city: data)
                     }
-                    .navigationBarTitle(Text("Surfing Spots"))
+                    .navigationBarTitle(Text(LocalizedStringKey("app_name_navigation_bar")))
                     .navigationBarItems(trailing:
                         ActivityIndicator(isAnimating: .constant(viewModel.loadingUpdate),
                                           color: .constant(UIColor.gray),

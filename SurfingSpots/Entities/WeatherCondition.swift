@@ -12,4 +12,17 @@ enum WeatherCondition: String {
     case Sunny
     case Cloudy
     case NotAvailable
+    
+    var localizedDescription: String {
+        get {
+            switch self {
+            case .Sunny:
+                return NSLocalizedString("sunny_weather", comment: "")
+            case .Cloudy:
+                return NSLocalizedString("cloudy_weather", comment: "")
+            case .NotAvailable:
+                return NSLocalizedString("weather_not_available", comment: "")
+            }
+        }
+    }
 }

@@ -34,6 +34,7 @@
 		1D59ECF424EE7AE900765B89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D59ECF224EE7AE900765B89 /* LaunchScreen.storyboard */; };
 		1D59ECFF24EE7AE900765B89 /* SurfingSpotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D59ECFE24EE7AE900765B89 /* SurfingSpotsTests.swift */; };
 		1D59ED0A24EE7AE900765B89 /* SurfingSpotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D59ED0924EE7AE900765B89 /* SurfingSpotsUITests.swift */; };
+		1D68442724F17007002B6CBB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D68442924F17007002B6CBB /* Localizable.strings */; };
 		A86BD2217FF5D60094892D62 /* Pods_SurfingSpotsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A0098789D047E013B8318C /* Pods_SurfingSpotsTests.framework */; };
 		E153E1FA7D95D2C01948497E /* Pods_SurfingSpots_SurfingSpotsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B2F676E428B60302C5E262 /* Pods_SurfingSpots_SurfingSpotsUITests.framework */; };
 		E6083DB22F2ED752CA37209B /* Pods_SurfingSpots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064ED41C88C140AF5B962DEE /* Pods_SurfingSpots.framework */; };
@@ -92,6 +93,7 @@
 		1D59ED0524EE7AE900765B89 /* SurfingSpotsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SurfingSpotsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D59ED0924EE7AE900765B89 /* SurfingSpotsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfingSpotsUITests.swift; sourceTree = "<group>"; };
 		1D59ED0B24EE7AE900765B89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1D68442824F17007002B6CBB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38B2F676E428B60302C5E262 /* Pods_SurfingSpots_SurfingSpotsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurfingSpots_SurfingSpotsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D96C2EA2E9548C0710D7B7F /* Pods-SurfingSpots-SurfingSpotsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurfingSpots-SurfingSpotsUITests.release.xcconfig"; path = "Target Support Files/Pods-SurfingSpots-SurfingSpotsUITests/Pods-SurfingSpots-SurfingSpotsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		97A0098789D047E013B8318C /* Pods_SurfingSpotsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurfingSpotsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,6 +260,7 @@
 				1D59ECF224EE7AE900765B89 /* LaunchScreen.storyboard */,
 				1D59ECF524EE7AE900765B89 /* Info.plist */,
 				1D59ECEF24EE7AE900765B89 /* Preview Content */,
+				1D68442924F17007002B6CBB /* Localizable.strings */,
 			);
 			path = SurfingSpots;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D59ECF424EE7AE900765B89 /* LaunchScreen.storyboard in Resources */,
+				1D68442724F17007002B6CBB /* Localizable.strings in Resources */,
 				1D59ECF124EE7AE900765B89 /* Preview Assets.xcassets in Resources */,
 				1D59ECEE24EE7AE900765B89 /* Assets.xcassets in Resources */,
 			);
@@ -579,6 +583,14 @@
 				1D59ECF324EE7AE900765B89 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		1D68442924F17007002B6CBB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D68442824F17007002B6CBB /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

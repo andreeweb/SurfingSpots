@@ -14,16 +14,17 @@ struct CityRow: View {
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
-                        
+                                    
             Image(uiImage: city.image)
                 .resizable()
                 .cornerRadius(15.0)
-            
+                        
             VStack(alignment: .leading) {
-                
+                                
                 Text(city.name)
                     .font(.largeTitle)
                     .foregroundColor(Color.white)
+                Spacer().frame(height: 5)
                 
                 HStack {
                     
@@ -33,11 +34,9 @@ struct CityRow: View {
                                           color: .constant(UIColor.gray),
                                           style: .medium)
                         
-                        Text("N/A")
-                            .font(.subheadline)
-                            .foregroundColor(Color.white)
                     }else{
-                        Text(city.weather.rawValue)
+                        
+                        Text(city.weather.localizedDescription)
                             .font(.subheadline)
                             .foregroundColor(Color.white)
                         
@@ -48,7 +47,7 @@ struct CityRow: View {
                     
                     if city.temperature == .infinity {
                         
-                        Text("--.-")
+                        Text(LocalizedStringKey("temperature_placeholder"))
                             .font(.subheadline)
                             .foregroundColor(Color.white)
                         
@@ -58,11 +57,12 @@ struct CityRow: View {
                             .font(.subheadline)
                             .foregroundColor(Color.white)
                         
-                        Text("degrees")
+                        Text(LocalizedStringKey("degrees_string"))
                             .font(.subheadline)
                             .foregroundColor(Color.white)
                     }
                 }
+                
             }.padding()
             
         }.frame(minWidth: 0,
@@ -79,9 +79,9 @@ struct CityRow_Previews: PreviewProvider {
     static var previews: some View {
     
         let name = "Cuba"
-        let image = #imageLiteral(resourceName: "test-image-city")
+        let image = #imageLiteral(resourceName: "city-placeholder")
         let temperature: Float = 28.8
-        let weather = WeatherCondition.Cloudy
+        let weather = WeatherCondition.Sunny
         
         let city = CityWeather(name: name,
                                image: image,

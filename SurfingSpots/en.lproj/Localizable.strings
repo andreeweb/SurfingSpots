@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  SurfingSpots
+
+  Created by Andrea Cerra on 8/22/20.
+  Copyright © 2020 Andrea Cerra. All rights reserved.
+*/
+
+"temperature_placeholder" = "--.-";
+"degrees_string" = "degrees";
+"data_not_available" = "No data available :(";
+"tap_to_try_again" = "Tap here to try again!";
+"app_name_navigation_bar" = "Surfing Spots";
+"sunny_weather" = "Sunny";
+"cloudy_weather" = "Cloudy";
+"weather_not_available" = "N/A";
