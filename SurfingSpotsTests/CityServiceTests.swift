@@ -111,7 +111,7 @@ class CityServiceTests: XCTestCase {
                 switch completion {
                 case .finished: XCTFail()
                 case .failure(let error):
-                    if case CityServiceError.CannotRetrieveCities = error {
+                    if case CityServiceError.InvalidJsonData = error {
                         expectation.fulfill()
                     }else{
                         XCTFail()

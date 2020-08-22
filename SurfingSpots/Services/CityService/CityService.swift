@@ -11,7 +11,7 @@ import Combine
 
 class CityService: CityServiceProtocol {
     
-    /// HTTP Service Class for make HTTP requests
+    // HTTP Service Class for make HTTP requests
     private var httpService: HTTPServiceProtocol
     
     init(httpService: HTTPServiceProtocol) {
@@ -23,10 +23,11 @@ class CityService: CityServiceProtocol {
         let url = CityServiceConfig.citiesEndpoint
         
         return httpService.makeHttpRequest(endpoint: url)
+            //.mapError { _ in return CityServiceError.CannotRetrieveCities }
             .map { httpRespose in return httpRespose.data }
             .decode(type: Cities.self, decoder: JSONDecoder())
             .map{ cities in return cities.cities }
-            .mapError { error in return CityServiceError.CannotRetrieveCities }
+            .mapError { error in return CityServiceError.InvalidJsonData }
             .eraseToAnyPublisher()
     }
 }

@@ -9,5 +9,6 @@
 import Foundation
 
 enum CityServiceError: Error {
+    case InvalidJsonData
     case CannotRetrieveCities
 }
