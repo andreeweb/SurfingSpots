@@ -12,6 +12,7 @@ import Combine
 enum JSONType {
     case JSONError
     case CitiesJson
+    case WeatherResponse
 }
 
 class HTTPServiceMock: HTTPServiceProtocol {
@@ -55,6 +56,8 @@ class HTTPServiceMock: HTTPServiceProtocol {
             """.data(using: .utf8)
         case .JSONError:
             jsonData = "{]".data(using: .utf8)
+        case .WeatherResponse:
+            jsonData = "6953 is 66 + 999 + 5555 + 333.".data(using: .utf8)
         }
         
         return Just(HTTPServiceResponse(data: jsonData!))
