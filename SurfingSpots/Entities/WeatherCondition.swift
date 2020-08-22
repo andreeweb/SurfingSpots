@@ -11,4 +11,5 @@ import Foundation
 enum WeatherCondition: String {
     case Sunny
     case Cloudy
+    case NotAvailable
 }

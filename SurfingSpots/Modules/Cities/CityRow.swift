@@ -14,28 +14,57 @@ struct CityRow: View {
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
+                        
             Image(uiImage: city.image)
                 .resizable()
                 .cornerRadius(15.0)
+            
             VStack(alignment: .leading) {
+                
                 Text(city.name)
                     .font(.largeTitle)
                     .foregroundColor(Color.white)
+                
                 HStack {
-                    Text(city.weather.rawValue)
-                        .font(.subheadline)
-                        .foregroundColor(Color.white)
-                    Text("-")
-                        .font(.subheadline)
-                        .foregroundColor(Color.white)
-                    Text(city.temperature.description)
-                        .font(.subheadline)
-                        .foregroundColor(Color.white)
-                    Text("degrees")
-                        .font(.subheadline)
-                        .foregroundColor(Color.white)
+                    
+                    if city.weather == WeatherCondition.NotAvailable {
+                        
+                        ActivityIndicator(isAnimating: .constant(true),
+                                          color: .constant(UIColor.gray),
+                                          style: .medium)
+                        
+                        Text("N/A")
+                            .font(.subheadline)
+                            .foregroundColor(Color.white)
+                    }else{
+                        Text(city.weather.rawValue)
+                            .font(.subheadline)
+                            .foregroundColor(Color.white)
+                        
+                        Text("-")
+                            .font(.subheadline)
+                            .foregroundColor(Color.white)
+                    }
+                    
+                    if city.temperature == .infinity {
+                        
+                        Text("--.-")
+                            .font(.subheadline)
+                            .foregroundColor(Color.white)
+                        
+                    }else{
+                        
+                        Text(city.temperature.description)
+                            .font(.subheadline)
+                            .foregroundColor(Color.white)
+                        
+                        Text("degrees")
+                            .font(.subheadline)
+                            .foregroundColor(Color.white)
+                    }
                 }
             }.padding()
+            
         }.frame(minWidth: 0,
                 maxWidth: .infinity,
                 minHeight: 0,

@@ -13,8 +13,9 @@ import UIKit
 final class CitiesViewModel: ObservableObject {
     
     @Published private(set) var cities: [CityWeather] = []
-    @Published private(set) var loading = true
-    @Published private(set) var showError = true
+    @Published private(set) var loadingMain = true
+    @Published private(set) var loadingUpdate = true
+    @Published private(set) var showError = false
         
     // https://www.appsdissected.com/save-sink-assign-subscriber-anycancellable/
     var subscription: Cancellable? = nil
@@ -30,8 +31,8 @@ final class CitiesViewModel: ObservableObject {
     func getCities() {
         
         // reset flags
-        self.loading = true
-        self.showError = false
+        loadingMain = true
+        showError = false
                 
         subscription = cityService.getCities().sink(
             receiveCompletion: { [weak self] completion in
@@ -44,33 +45,43 @@ final class CitiesViewModel: ObservableObject {
                     self?.errorView()
                 }
             }, receiveValue: { [weak self] (downloadedCities) in
-                self?.parseData(cities: downloadedCities)
+                self?.parseData(data: downloadedCities)
             })
     }
     
-    private func parseData(cities: [City]){
+    private func parseData(data: [City]){
         
-        for city in cities {
+        for city in data {
             
             let name = city.name
-            let image = #imageLiteral(resourceName: "test-image-city")
-            let temperature: Float = 28.8
-            let weather = WeatherCondition.Cloudy
+            let image = #imageLiteral(resourceName: "city-placeholder")
+            let temperature: Float = .infinity
+            let weather = WeatherCondition.NotAvailable
             
             let city = CityWeather(name: name,
                                    image: image,
                                    temperature: temperature,
                                    weather: weather)
-            self.cities.append(city)
+            cities.append(city)
         }
         
-        self.loading = false
+        loadingMain = false
+        loadingUpdate = false
+        showError = false
+    }
+    
+    private func updateData(){
+        
     }
     
     private func errorView(){
         
-        self.loading = false
-        self.showError = true
+        // reset list data
+        cities = []
+        
+        loadingMain = false
+        showError = true
+        loadingUpdate = false
     }
     
     deinit {

@@ -18,24 +18,44 @@ struct CitiesView: View {
         UITableView.appearance().separatorStyle = .none
                 
         return ZStack {
-                        
+            
             NavigationView {
-                List(viewModel.cities) { data in
-                    CityRow(city: data)
-                }.navigationBarTitle(Text("Surfing Spots"))
-                .foregroundColor(Color.gray)
-                .navigationBarItems(trailing:
-                    ActivityIndicator(isAnimating: .constant(true),
+                
+                if viewModel.showError {
+                
+                    VStack{
+                        Text("Error")
+                        Spacer().frame(height: 15)
+                        Button(action: {
+                            self.viewModel.getCities()
+                        }){
+                            Text("Tap Here")
+                        }
+                    }
+                    .navigationBarTitle(Text("Surfing Spots"))
+                    
+                } else {
+                    
+                    List(viewModel.cities) { data in
+                        CityRow(city: data)
+                    }
+                    .navigationBarTitle(Text("Surfing Spots"))
+                    .navigationBarItems(trailing:
+                        ActivityIndicator(isAnimating: .constant(viewModel.loadingUpdate),
+                                          color: .constant(UIColor.gray),
+                                          style: .medium)
+                    )
+                    
+                    ActivityIndicator(isAnimating: .constant(viewModel.loadingMain),
                                       color: .constant(UIColor.gray),
-                                      style: .medium)
-                )
+                                      style: .large)
+                }
+                
             }.onAppear {
+                
+                // request data from the view model
                 self.viewModel.getCities()
             }
-            
-            ActivityIndicator(isAnimating: .constant(viewModel.loading),
-                              color: .constant(UIColor.gray),
-                              style: .large)
         }
     }
 }
