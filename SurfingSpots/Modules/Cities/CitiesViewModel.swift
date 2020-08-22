@@ -18,9 +18,13 @@ final class CitiesViewModel: ObservableObject {
     @Published private(set) var showError = false
         
     // https://www.appsdissected.com/save-sink-assign-subscriber-anycancellable/
-    var subscription: Cancellable? = nil
+    private var subscription: Cancellable? = nil
     
-    /// Dependencies
+    // timer for the weather and temperature update
+    private var updateTimer: Timer?
+    private let updateTime: Double = 3.0
+    
+    // Dependencies
     var cityService: CityServiceProtocol
     
     init(cityService: CityServiceProtocol) {
@@ -47,6 +51,13 @@ final class CitiesViewModel: ObservableObject {
             }, receiveValue: { [weak self] (downloadedCities) in
                 self?.parseData(data: downloadedCities)
             })
+        
+        // schedule timer for next update
+        updateTimer = Timer.scheduledTimer(timeInterval: updateTime,
+                                           target: self,
+                                           selector: #selector(updateData),
+                                           userInfo: nil,
+                                           repeats: true)
     }
     
     private func parseData(data: [City]){
@@ -70,8 +81,18 @@ final class CitiesViewModel: ObservableObject {
         showError = false
     }
     
-    private func updateData(){
+    private func updateWeather(city: City){
         
+    }
+    
+    private func reorderList(){
+        
+    }
+    
+    @objc private func updateData(){
+        
+        loadingUpdate = true
+        showError = false
     }
     
     private func errorView(){
@@ -86,5 +107,6 @@ final class CitiesViewModel: ObservableObject {
     
     deinit {
         subscription?.cancel()
+        updateTimer?.invalidate()
     }
 }
