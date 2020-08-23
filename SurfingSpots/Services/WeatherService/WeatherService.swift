@@ -20,7 +20,7 @@ class WeatherService: WeatherServiceProtocol {
     
     func getWeatherForCity(city: String) -> AnyPublisher<WeatherData, WeatherServiceError> {
         
-        let url = CityServiceConfig.citiesEndpoint
+        let url = WeatherServiceConfig.weatherEndpoint
         
         return httpService.makeHttpRequest(endpoint: url)
             .mapError { _ in return WeatherServiceError.WeatherNotAvailable }
