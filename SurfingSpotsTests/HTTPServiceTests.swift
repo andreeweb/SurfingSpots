@@ -24,16 +24,14 @@ class HTTPServiceTests: XCTestCase {
         
         // setup
         continueAfterFailure = false
-        let endpoint = "https://www.reddit.com/r/spacex/top.json"
+        let endpoint = "https://run.mocky.io/v3/652ceb94-b24e-432b-b6c5-8a54bc1226b6"
         let expectation = XCTestExpectation(description: "Download json from \(endpoint)")
         
         let httpService = HTTPService()
         
         let remoteDataPublisher = httpService.makeHttpRequest(endpoint: endpoint)
             .sink(receiveCompletion: { completion in
-                
-                print(".sink() received the completion", String(describing: completion))
-                
+                                
                 switch completion {
                 case .finished: expectation.fulfill()
                 case .failure: XCTFail()
@@ -41,15 +39,15 @@ class HTTPServiceTests: XCTestCase {
                 
             }, receiveValue: { httpRespose in
                 
-                print(".sink() data received \(httpRespose.data)")
+                let resultData = """
+                {
+                "cities": [{"name": "Cuba"}, {"name": "Los Angeles"}, {"name": "Miami"}, {"name": "Porto"}, {"name": "Ortona"}, {"name": "Riccione"}, {"name": "Midgar"}]
+                }
+                """.data(using: .utf8)
                 
                 XCTAssertNotNil(httpRespose.data)
                 XCTAssertNotNil(httpRespose)
-                
-                guard (httpRespose.data as Any) is Data else {
-                    XCTFail("Unable to parse httpRespose data")
-                    return
-                }
+                XCTAssert(httpRespose.data == resultData)
             })
         
         XCTAssertNotNil(remoteDataPublisher)

@@ -20,11 +20,6 @@ class WeatherServiceTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
@@ -45,22 +40,15 @@ class WeatherServiceTests: XCTestCase {
 
         let remoteDataPublisher = weatherService.getWeatherForCity(city: "Rome")
             .sink(receiveCompletion: { completion in
-                
-                print(".sink() received the completion", String(describing: completion))
-                
+                                
                 switch completion {
                 case .finished: expectation.fulfill()
                 case .failure: XCTFail()
                 }
                 
             }, receiveValue: { weather in
-                
-                print(".sink() weather parsed \(weather)")
-                
-                guard (weather as Any) is WeatherData else {
-                    XCTFail("Wrong data format")
-                    return
-                }
+                                
+                XCTAssert(weather.temperature == 6953)
             })
         
         XCTAssertNotNil(remoteDataPublisher)
@@ -80,9 +68,7 @@ class WeatherServiceTests: XCTestCase {
         
         let remoteDataPublisher = weatherService.getWeatherForCity(city: "Rome")
             .sink(receiveCompletion: { completion in
-                
-                print(".sink() received the completion", String(describing: completion))
-                
+                                
                 switch completion {
                 case .finished: XCTFail()
                 case .failure(let error):
@@ -112,9 +98,7 @@ class WeatherServiceTests: XCTestCase {
         
         let remoteDataPublisher = weatherService.getWeatherForCity(city: "Rome")
             .sink(receiveCompletion: { completion in
-                
-                print(".sink() received the completion", String(describing: completion))
-                
+                                
                 switch completion {
                 case .finished: XCTFail()
                 case .failure(let error):

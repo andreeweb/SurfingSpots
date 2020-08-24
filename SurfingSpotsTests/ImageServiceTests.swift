@@ -40,9 +40,7 @@ class ImageServiceTests: XCTestCase {
         
         let remoteDataPublisher = imageService.getImageForCity(city: "Rome")
             .sink(receiveCompletion: { completion in
-                
-                print(".sink() received the completion", String(describing: completion))
-                
+                                
                 switch completion {
                 case .finished: expectation.fulfill()
                 case .failure: XCTFail()
@@ -72,9 +70,7 @@ class ImageServiceTests: XCTestCase {
 
         let remoteDataPublisher = imageService.getImageForCity(city: "Rome")
             .sink(receiveCompletion: { completion in
-                
-                print(".sink() received the completion", String(describing: completion))
-                
+                                
                 switch completion {
                 case .finished: XCTFail()
                 case .failure(let error):

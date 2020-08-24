@@ -31,9 +31,7 @@ class CityServiceTests: XCTestCase {
         
         let remoteDataPublisher = cityService.getCities()
             .sink(receiveCompletion: { completion in
-                
-                print(".sink() received the completion", String(describing: completion))
-                
+                                
                 switch completion {
                 case .finished: expectation.fulfill()
                 case .failure: XCTFail()
@@ -41,8 +39,6 @@ class CityServiceTests: XCTestCase {
                 
             }, receiveValue: { cities in
                 
-                print(".sink() cities parsed \(cities.count)")
-
                 XCTAssertNotNil(cities)
                 
                 guard (cities as Any) is [City] else {
@@ -68,18 +64,14 @@ class CityServiceTests: XCTestCase {
         
         let remoteDataPublisher = cityService.getCities()
             .sink(receiveCompletion: { completion in
-                
-                print(".sink() received the completion", String(describing: completion))
-                
+                                
                 switch completion {
                 case .finished: expectation.fulfill()
                 case .failure: XCTFail()
                 }
                 
             }, receiveValue: { cities in
-                
-                print(".sink() cities parsed \(cities.count)")
-                
+                                
                 XCTAssertNotNil(cities)
                 
                 guard (cities as Any) is [City] else {
@@ -105,9 +97,7 @@ class CityServiceTests: XCTestCase {
         
         let remoteDataPublisher = cityService.getCities()
             .sink(receiveCompletion: { completion in
-                
-                print(".sink() received the completion", String(describing: completion))
-                
+                                
                 switch completion {
                 case .finished: XCTFail()
                 case .failure(let error):
@@ -137,9 +127,7 @@ class CityServiceTests: XCTestCase {
         
         let remoteDataPublisher = cityService.getCities()
             .sink(receiveCompletion: { completion in
-                
-                print(".sink() received the completion", String(describing: completion))
-                
+                                
                 switch completion {
                 case .finished: XCTFail()
                 case .failure(let error):
