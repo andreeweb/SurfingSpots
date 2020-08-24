@@ -60,6 +60,7 @@ struct CitiesView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         CitiesView(viewModel: CitiesViewModel(cityService: CityServiceMock(),
-                                              weatherService: WeatherServiceMock()))
+                                              weatherService: WeatherServiceMock(),
+                                              imageService: ImageServiceMock()))
     }
 }

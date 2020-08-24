@@ -19,6 +19,7 @@ final class CitiesViewModel: ObservableObject {
     // https://www.appsdissected.com/save-sink-assign-subscriber-anycancellable/
     private var subscription: Cancellable? = nil
     private var weatherSubscriptions: [Cancellable] = []
+    private var imageSubscriptions: [Cancellable] = []
     
     // timer for the weather and temperature update
     private var updateTimer: Timer?
@@ -27,12 +28,15 @@ final class CitiesViewModel: ObservableObject {
     // Dependencies
     private let cityService: CityServiceProtocol
     private let weatherService: WeatherServiceProtocol
+    private let imageService: ImageServiceProtocol
     
     init(cityService: CityServiceProtocol,
-         weatherService: WeatherServiceProtocol) {
+         weatherService: WeatherServiceProtocol,
+         imageService: ImageServiceProtocol) {
         
         self.cityService = cityService
         self.weatherService = weatherService
+        self.imageService = imageService
     }
     
     /// It updates the @Published cities array exposed from this ViewModel
@@ -114,16 +118,14 @@ final class CitiesViewModel: ObservableObject {
                 switch completion {
                 case .finished:
                     break
-                case .failure(let error):
-                    print(error)
-                    self?.updateCityWithNoWeatherData(city: city)
+                case .failure:
+                    self?.loading = false
+                    self?.updateCityWeather(weatherData: nil, city: city)
                 }
             
             }, receiveValue: { [weak self] (weatherData) in
                 
-                self?.updateCityWithNewWeather(weatherData: weatherData,
-                                               city: city)
-                
+                self?.updateCityWeather(weatherData: weatherData,city: city)
                 self?.loading = false
             })
         
@@ -133,48 +135,96 @@ final class CitiesViewModel: ObservableObject {
     /// It updates the weather data for a specific city.
     /// It also updates the local cities array that will cause a View update
     ///
-    private func updateCityWithNewWeather(weatherData: WeatherData,
-                                          city: CityWeather) {
+    private func updateCityWeather(weatherData: WeatherData?,
+                                   city: CityWeather) {
         
         var weather = WeatherCondition.NotAvailable
-        var backgroundImage = #imageLiteral(resourceName: "city-placeholder")
+        let backgroundImage = #imageLiteral(resourceName: "city-placeholder")
+        var temperature: Float = .infinity
+        var loadImage = false
         
-        if weatherData.temperature >= 30.0 {
+        if weatherData != nil {
             
-            weather = .Sunny
-            // download the image!! only in this case TBD
+            if weatherData!.temperature >= 30.0 {
+                
+                weather = .Sunny
+                loadImage = true
+                
+            }else{
+                
+                weather = .Cloudy
+            }
             
-        }else{
-            
-            weather = .Cloudy
-            backgroundImage = #imageLiteral(resourceName: "city-cloudy-bg")
+            temperature = Float(weatherData!.temperature)
         }
         
         let cityWeatherUpdated =  CityWeather(name: city.name,
                                               image: backgroundImage,
-                                              temperature: Float(weatherData.temperature),
+                                              temperature: Float(temperature),
                                               weather: weather,
-                                              isLoadingImage: city.isLoadingImage,
+                                              isLoadingImage: loadImage,
                                               isLoadingWeather: false)
+        
+        downloadCityImage(for: cityWeatherUpdated)
         
         updateCityInList(oldCity: city,
                          updatedCity: cityWeatherUpdated)
     }
     
-    /// It updates the specifc city with No-Weather information
+    /// It download/retrieve the image for the selected city.
+    /// this method will cause a view update.
+    ///
+    private func downloadCityImage(for city: CityWeather){
+        
+        if city.temperature < 30.0 {
+            
+            self.updateCityWithNewImage(image: UIImage(imageLiteralResourceName: "city-cloudy-bg"), city: city)
+            return
+        }
+        
+        // update in progress
+        loading = true
+        
+        let sub = imageService.getImageForCity(city: city.name).sink(
+            receiveCompletion: { [weak self] completion in
+                
+                switch completion {
+                case .finished:
+                    break
+                case .failure:
+                    self?.updateCityWithNewImage(image: nil, city: city)
+                }
+                
+            }, receiveValue: { [weak self] (image) in
+                
+                self?.updateCityWithNewImage(image: image, city: city)
+                self?.loading = false
+        })
+        
+        imageSubscriptions.append(sub)
+    }
+    
+    /// It updates the image for the specified city
     /// It also updates the local cities array that will cause a View update
     ///
-    private func updateCityWithNoWeatherData(city: CityWeather) {
+    private func updateCityWithNewImage(image: UIImage?,
+                                        city: CityWeather) {
         
-        let cityWeatherUpdated = CityWeather(name: city.name,
-                                             image: city.image,
-                                             temperature: .infinity,
-                                             weather: WeatherCondition.NotAvailable,
-                                             isLoadingImage: city.isLoadingImage,
-                                             isLoadingWeather: false)
+        var backgroundImage = #imageLiteral(resourceName: "city-placeholder")
+        
+        if image != nil {
+            backgroundImage = image!
+        }
+        
+        let cityImageUpdated =  CityWeather(name: city.name,
+                                              image: backgroundImage,
+                                              temperature: city.temperature,
+                                              weather: city.weather,
+                                              isLoadingImage: false,
+                                              isLoadingWeather: false)
         
         updateCityInList(oldCity: city,
-                         updatedCity: cityWeatherUpdated)
+                         updatedCity: cityImageUpdated)
     }
     
     /// It replaces (in order to force the update) in the cities array the CityWeather passed
@@ -192,14 +242,6 @@ final class CitiesViewModel: ObservableObject {
         reorderList()
     }
     
-    /// It download/retrieve the image for the selected city.
-    /// this method will cause a view update.
-    ///
-    private func updateCityImage(for city: CityWeather){
-        
-        
-    }
-    
     /// It encapsulete the logic for reorder the cities array in order to have
     /// cities from the hottest to the coolest.
     ///
@@ -213,6 +255,11 @@ final class CitiesViewModel: ObservableObject {
     /// It encapsulate the logic for random update the weather.
     ///
     @objc private func updateData(){
+        
+        // skip update if a previous update is in progress
+        if loading == true {
+            return
+        }
         
         loading = true
         
@@ -243,6 +290,10 @@ final class CitiesViewModel: ObservableObject {
         updateTimer?.invalidate()
         
         for sub in weatherSubscriptions {
+            sub.cancel()
+        }
+        
+        for sub in imageSubscriptions {
             sub.cancel()
         }
     }

@@ -28,8 +28,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let httpService = HTTPService()
                 let cityService = CityService(httpService: httpService)
                 let weatherService = WeatherService(httpService: httpService)
+                let imageService = ImageService(httpService: httpService)
+                
                 let viewModel = CitiesViewModel(cityService: cityService,
-                                                weatherService: weatherService)
+                                                weatherService: weatherService,
+                                                imageService: imageService)
                 
                 // Create the SwiftUI view that provides the window contents.
                 let contentView = CitiesView(viewModel: viewModel)
