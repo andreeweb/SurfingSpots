@@ -188,6 +188,8 @@ final class CitiesViewModel: ObservableObject {
         if let i = cities.firstIndex(where: { $0.name == oldCity.name }) {
             cities[i] = updatedCity
         }
+        
+        reorderList()
     }
     
     /// It download/retrieve the image for the selected city.
@@ -200,10 +202,12 @@ final class CitiesViewModel: ObservableObject {
     
     /// It encapsulete the logic for reorder the cities array in order to have
     /// cities from the hottest to the coolest.
-    /// This method will cause a View updates.
     ///
     private func reorderList(){
         
+        cities.sort {
+            $0.temperature > $1.temperature
+        }
     }
     
     /// It encapsulate the logic for random update the weather.
