@@ -42,6 +42,12 @@
 		1D68443524F17977002B6CBB /* WeatherServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D68443424F17977002B6CBB /* WeatherServiceTests.swift */; };
 		1D68443724F17D0C002B6CBB /* WeatherServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D68443624F17D0C002B6CBB /* WeatherServiceMock.swift */; };
 		1D68443924F17E5C002B6CBB /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D68443824F17E5C002B6CBB /* WeatherData.swift */; };
+		1D68443E24F3A676002B6CBB /* ImageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D68443D24F3A676002B6CBB /* ImageServiceProtocol.swift */; };
+		1D68444024F3A67D002B6CBB /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D68443F24F3A67D002B6CBB /* ImageService.swift */; };
+		1D68444224F3A685002B6CBB /* ImageServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D68444124F3A685002B6CBB /* ImageServiceError.swift */; };
+		1D68444424F3A899002B6CBB /* ImageServiceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D68444324F3A899002B6CBB /* ImageServiceConfig.swift */; };
+		1D68444624F42F16002B6CBB /* ImageServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D68444524F42F16002B6CBB /* ImageServiceMock.swift */; };
+		1D68444824F42FE9002B6CBB /* ImageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D68444724F42FE9002B6CBB /* ImageServiceTests.swift */; };
 		A86BD2217FF5D60094892D62 /* Pods_SurfingSpotsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A0098789D047E013B8318C /* Pods_SurfingSpotsTests.framework */; };
 		E153E1FA7D95D2C01948497E /* Pods_SurfingSpots_SurfingSpotsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B2F676E428B60302C5E262 /* Pods_SurfingSpots_SurfingSpotsUITests.framework */; };
 		E6083DB22F2ED752CA37209B /* Pods_SurfingSpots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064ED41C88C140AF5B962DEE /* Pods_SurfingSpots.framework */; };
@@ -108,6 +114,12 @@
 		1D68443424F17977002B6CBB /* WeatherServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceTests.swift; sourceTree = "<group>"; };
 		1D68443624F17D0C002B6CBB /* WeatherServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceMock.swift; sourceTree = "<group>"; };
 		1D68443824F17E5C002B6CBB /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		1D68443D24F3A676002B6CBB /* ImageServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceProtocol.swift; sourceTree = "<group>"; };
+		1D68443F24F3A67D002B6CBB /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		1D68444124F3A685002B6CBB /* ImageServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceError.swift; sourceTree = "<group>"; };
+		1D68444324F3A899002B6CBB /* ImageServiceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceConfig.swift; sourceTree = "<group>"; };
+		1D68444524F42F16002B6CBB /* ImageServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceMock.swift; sourceTree = "<group>"; };
+		1D68444724F42FE9002B6CBB /* ImageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceTests.swift; sourceTree = "<group>"; };
 		38B2F676E428B60302C5E262 /* Pods_SurfingSpots_SurfingSpotsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurfingSpots_SurfingSpotsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D96C2EA2E9548C0710D7B7F /* Pods-SurfingSpots-SurfingSpotsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurfingSpots-SurfingSpotsUITests.release.xcconfig"; path = "Target Support Files/Pods-SurfingSpots-SurfingSpotsUITests/Pods-SurfingSpots-SurfingSpotsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		97A0098789D047E013B8318C /* Pods_SurfingSpotsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurfingSpotsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +160,7 @@
 		1D10320A24EEAFED00E73D93 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1D68443A24F3A657002B6CBB /* ImageService */,
 				1D68442A24F1770F002B6CBB /* WeatherService */,
 				1D10321B24EF9F1500E73D93 /* CityService */,
 				1D10320B24EEAFFC00E73D93 /* HTTPService */,
@@ -180,6 +193,7 @@
 				1D10321824EEDAB500E73D93 /* HTTPServiceMock.swift */,
 				1D10322B24EFB2D400E73D93 /* CityServiceMock.swift */,
 				1D68443624F17D0C002B6CBB /* WeatherServiceMock.swift */,
+				1D68444524F42F16002B6CBB /* ImageServiceMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -297,6 +311,7 @@
 				1D10321524EEC78A00E73D93 /* HTTPServiceTests.swift */,
 				1D10322724EFA7EB00E73D93 /* CityServiceTests.swift */,
 				1D68443424F17977002B6CBB /* WeatherServiceTests.swift */,
+				1D68444724F42FE9002B6CBB /* ImageServiceTests.swift */,
 			);
 			path = SurfingSpotsTests;
 			sourceTree = "<group>";
@@ -326,6 +341,25 @@
 			isa = PBXGroup;
 			children = (
 				1D68443824F17E5C002B6CBB /* WeatherData.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		1D68443A24F3A657002B6CBB /* ImageService */ = {
+			isa = PBXGroup;
+			children = (
+				1D68443C24F3A668002B6CBB /* Entities */,
+				1D68443D24F3A676002B6CBB /* ImageServiceProtocol.swift */,
+				1D68443F24F3A67D002B6CBB /* ImageService.swift */,
+				1D68444124F3A685002B6CBB /* ImageServiceError.swift */,
+				1D68444324F3A899002B6CBB /* ImageServiceConfig.swift */,
+			);
+			path = ImageService;
+			sourceTree = "<group>";
+		};
+		1D68443C24F3A668002B6CBB /* Entities */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -557,8 +591,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D68443E24F3A676002B6CBB /* ImageServiceProtocol.swift in Sources */,
 				1D68442D24F17722002B6CBB /* WeatherServiceProtocol.swift in Sources */,
 				1D10322024EF9FA300E73D93 /* CityServiceProtocol.swift in Sources */,
+				1D68444424F3A899002B6CBB /* ImageServiceConfig.swift in Sources */,
 				1D68442F24F17729002B6CBB /* WeatherService.swift in Sources */,
 				1D10320F24EEB02200E73D93 /* HTTPService.swift in Sources */,
 				1D68443724F17D0C002B6CBB /* WeatherServiceMock.swift in Sources */,
@@ -569,17 +605,20 @@
 				1D10322A24EFA8E500E73D93 /* Cities.swift in Sources */,
 				1D59ECEA24EE7AE800765B89 /* SceneDelegate.swift in Sources */,
 				1D10323824EFBA1800E73D93 /* WeatherCondition.swift in Sources */,
+				1D68444024F3A67D002B6CBB /* ImageService.swift in Sources */,
 				1D10321A24EEDD4400E73D93 /* HTTPServiceMock.swift in Sources */,
 				1D10322224EF9FB200E73D93 /* CityService.swift in Sources */,
 				1D68443324F17741002B6CBB /* WeatherServiceConfig.swift in Sources */,
 				1D10323624EFB93600E73D93 /* CityWeather.swift in Sources */,
 				1D59ECEC24EE7AE800765B89 /* CitiesView.swift in Sources */,
 				1D10321224EEB0C400E73D93 /* HTTPServiceResponse.swift in Sources */,
+				1D68444224F3A685002B6CBB /* ImageServiceError.swift in Sources */,
 				1D10322624EFA04400E73D93 /* CityServiceError.swift in Sources */,
 				1D10320D24EEB01500E73D93 /* HTTPServiceProtocol.swift in Sources */,
 				1D10323224EFB61400E73D93 /* CitiesViewModel.swift in Sources */,
 				1D13178A24EFE98E0046BFE6 /* ActivityIndicator.swift in Sources */,
 				1D10322424EF9FE000E73D93 /* CityServiceConfig.swift in Sources */,
+				1D68444624F42F16002B6CBB /* ImageServiceMock.swift in Sources */,
 				1D10323424EFB7E200E73D93 /* CityRow.swift in Sources */,
 				1D68443124F17737002B6CBB /* WeatherServiceError.swift in Sources */,
 				1D10321424EEB0F700E73D93 /* HTTPServiceError.swift in Sources */,
@@ -593,6 +632,7 @@
 				1D68443524F17977002B6CBB /* WeatherServiceTests.swift in Sources */,
 				1D59ECFF24EE7AE900765B89 /* SurfingSpotsTests.swift in Sources */,
 				1D10322824EFA7EB00E73D93 /* CityServiceTests.swift in Sources */,
+				1D68444824F42FE9002B6CBB /* ImageServiceTests.swift in Sources */,
 				1D10321624EEC78A00E73D93 /* HTTPServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

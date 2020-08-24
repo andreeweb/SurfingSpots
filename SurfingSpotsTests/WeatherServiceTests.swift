@@ -39,7 +39,7 @@ class WeatherServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Weather value downloaded")
         
         let httpService = HTTPServiceMock()
-        httpService.jsonType = JSONType.WeatherResponse
+        httpService.jsonType = ResultType.WeatherResponse
         
         let weatherService = WeatherService(httpService: httpService)
 

@@ -62,7 +62,7 @@ class CityServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Cities downloaded")
         
         let httpService = HTTPServiceMock()
-        httpService.jsonType = JSONType.CitiesJson
+        httpService.jsonType = ResultType.CitiesJson
         
         let cityService = CityService(httpService: httpService)
         
@@ -99,7 +99,7 @@ class CityServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Cities downloaded")
         
         let httpService = HTTPServiceMock()
-        httpService.jsonType = JSONType.JSONError
+        httpService.jsonType = ResultType.JSONError
         
         let cityService = CityService(httpService: httpService)
         

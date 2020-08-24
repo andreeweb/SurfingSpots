@@ -8,17 +8,19 @@
 
 import Foundation
 import Combine
+import UIKit
 
-enum JSONType {
+enum ResultType {
     case JSONError
     case CitiesJson
     case WeatherResponse
+    case ImageData
 }
 
 class HTTPServiceMock: HTTPServiceProtocol {
     
     /// Used for select the mock json response
-    var jsonType: JSONType?
+    var jsonType: ResultType?
     var validHTTPConnection: Bool = true
     
     func makeHttpRequest(endpoint: String) -> AnyPublisher<HTTPServiceResponse, HTTPServiceError> {
@@ -31,11 +33,11 @@ class HTTPServiceMock: HTTPServiceProtocol {
             return Fail(error: HTTPServiceError.HTTPRequestError(reason: "Mock error")).eraseToAnyPublisher()
         }
         
-        var jsonData: Data? = "".data(using: .utf8)
+        var resultData: Data? = "".data(using: .utf8)
         
         switch jsonType! {
         case .CitiesJson:
-            jsonData = """
+            resultData = """
             {
                 "cities": [{
                     "name": "Cuba"
@@ -55,12 +57,14 @@ class HTTPServiceMock: HTTPServiceProtocol {
             }
             """.data(using: .utf8)
         case .JSONError:
-            jsonData = "{]".data(using: .utf8)
+            resultData = "{]".data(using: .utf8)
         case .WeatherResponse:
-            jsonData = "6953 is 66 + 999 + 5555 + 333.".data(using: .utf8)
+            resultData = "6953 is 66 + 999 + 5555 + 333.".data(using: .utf8)
+        case .ImageData:
+            resultData = UIImage(imageLiteralResourceName: "city-placeholder").pngData()
         }
         
-        return Just(HTTPServiceResponse(data: jsonData!))
+        return Just(HTTPServiceResponse(data: resultData!))
             .setFailureType(to: HTTPServiceError.self)
             .eraseToAnyPublisher()
     }
