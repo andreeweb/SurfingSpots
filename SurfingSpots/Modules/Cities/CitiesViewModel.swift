@@ -53,8 +53,7 @@ final class CitiesViewModel: ObservableObject {
                 case .finished:
                     self?.startUpdate()
                     break
-                case .failure(let error):
-                    print(error)
+                case .failure:
                     self?.errorView()
                 }
             }, receiveValue: { [weak self] (downloadedCities) in

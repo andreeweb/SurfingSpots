@@ -32,7 +32,13 @@ struct CitiesView: View {
                             Text(LocalizedStringKey("tap_to_try_again"))
                         }
                     }
+                    .animation(.spring())
                     .navigationBarTitle(Text(LocalizedStringKey("app_name_navigation_bar")))
+                    .navigationBarItems(trailing:
+                        ActivityIndicator(isAnimating: .constant(viewModel.loading),
+                                          color: .constant(UIColor.gray),
+                                          style: .medium)
+                    )
                     
                 } else {
                     
