@@ -13,6 +13,7 @@ struct CityRow: View {
     let city: CityWeather
     
     var body: some View {
+        
         ZStack(alignment: .bottomLeading) {
                                     
             Image(uiImage: city.image)
@@ -28,7 +29,7 @@ struct CityRow: View {
                 
                 HStack {
                     
-                    if city.weather == WeatherCondition.NotAvailable {
+                    if (city.isLoadingImage || city.isLoadingWeather) {
                         
                         ActivityIndicator(isAnimating: .constant(true),
                                           color: .constant(UIColor.gray),
@@ -39,10 +40,6 @@ struct CityRow: View {
                         Text(city.weather.localizedDescription)
                             .font(.subheadline)
                             .foregroundColor(Color.white)
-                        
-                        Text("-")
-                            .font(.subheadline)
-                            .foregroundColor(Color.white)
                     }
                     
                     if city.temperature == .infinity {
@@ -50,8 +47,12 @@ struct CityRow: View {
                         Text(LocalizedStringKey("temperature_placeholder"))
                             .font(.subheadline)
                             .foregroundColor(Color.white)
-                        
+                                                
                     }else{
+                        
+                        Text("-")
+                            .font(.subheadline)
+                            .foregroundColor(Color.white)
                         
                         Text(city.temperature.description)
                             .font(.subheadline)
@@ -86,7 +87,9 @@ struct CityRow_Previews: PreviewProvider {
         let city = CityWeather(name: name,
                                image: image,
                                temperature: temperature,
-                               weather: weather)
+                               weather: weather,
+                               isLoadingImage: false,
+                               isLoadingWeather: false)
         
         return CityRow(city: city)
     }

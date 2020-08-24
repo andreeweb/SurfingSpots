@@ -16,4 +16,6 @@ struct CityWeather: Identifiable {
     let image: UIImage
     var temperature: Float
     let weather: WeatherCondition
+    var isLoadingImage: Bool
+    var isLoadingWeather: Bool
 }

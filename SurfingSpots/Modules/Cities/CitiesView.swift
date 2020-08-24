@@ -39,16 +39,13 @@ struct CitiesView: View {
                     List(viewModel.cities) { data in
                         CityRow(city: data)
                     }
+                    .animation(.spring())
                     .navigationBarTitle(Text(LocalizedStringKey("app_name_navigation_bar")))
                     .navigationBarItems(trailing:
-                        ActivityIndicator(isAnimating: .constant(viewModel.loadingUpdate),
+                        ActivityIndicator(isAnimating: .constant(viewModel.loading),
                                           color: .constant(UIColor.gray),
                                           style: .medium)
                     )
-                    
-                    ActivityIndicator(isAnimating: .constant(viewModel.loadingMain),
-                                      color: .constant(UIColor.gray),
-                                      style: .large)
                 }
                 
             }.onAppear {
@@ -62,6 +59,7 @@ struct CitiesView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        CitiesView(viewModel: CitiesViewModel(cityService: CityServiceMock()))
+        CitiesView(viewModel: CitiesViewModel(cityService: CityServiceMock(),
+                                              weatherService: WeatherServiceMock()))
     }
 }

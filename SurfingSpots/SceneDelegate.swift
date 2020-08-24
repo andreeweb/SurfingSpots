@@ -27,7 +27,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 // Create and inject the ViewModel
                 let httpService = HTTPService()
                 let cityService = CityService(httpService: httpService)
-                let viewModel = CitiesViewModel(cityService: cityService)
+                let weatherService = WeatherService(httpService: httpService)
+                let viewModel = CitiesViewModel(cityService: cityService,
+                                                weatherService: weatherService)
                 
                 // Create the SwiftUI view that provides the window contents.
                 let contentView = CitiesView(viewModel: viewModel)
