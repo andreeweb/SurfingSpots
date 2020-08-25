@@ -24,6 +24,7 @@ final class CitiesViewModel: ObservableObject {
     // timer for the weather and temperature update
     private var updateTimer: Timer?
     private let updateTime: Double = 3.0
+    private let temperatureThreshold: Float = 30.0
     
     // Dependencies
     private let cityService: CityServiceProtocol
@@ -144,7 +145,7 @@ final class CitiesViewModel: ObservableObject {
         
         if weatherData != nil {
             
-            if weatherData!.temperature >= 30.0 {
+            if weatherData!.temperature >= temperatureThreshold {
                 
                 weather = .Sunny
                 loadImage = true
@@ -175,7 +176,7 @@ final class CitiesViewModel: ObservableObject {
     ///
     private func downloadCityImage(for city: CityWeather){
         
-        if city.temperature < 30.0 {
+        if city.temperature < temperatureThreshold {
             
             self.updateCityWithNewImage(image: UIImage(imageLiteralResourceName: "city-cloudy-bg"), city: city)
             return

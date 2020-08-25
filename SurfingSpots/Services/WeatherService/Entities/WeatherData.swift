@@ -10,5 +10,5 @@ import Foundation
 
 struct WeatherData {
     
-    let temperature: Double
+    let temperature: Float
 }

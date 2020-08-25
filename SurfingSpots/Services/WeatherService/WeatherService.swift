@@ -33,11 +33,11 @@ class WeatherService: WeatherServiceProtocol {
     /// It returns the first number encounter in the string passed
     ///
     /// - Returns: The number extraceted
-    private func parseNumber(_ string: String) throws -> Double {
+    private func parseNumber(_ string: String) throws -> Float {
         
         let stringArray = string.components(separatedBy: CharacterSet.decimalDigits.inverted)
         
-        if let number = Double(stringArray[0]) {
+        if let number = Float(stringArray[0]) {
             return number
         }else{
             throw WeatherServiceError.ParsingDataError

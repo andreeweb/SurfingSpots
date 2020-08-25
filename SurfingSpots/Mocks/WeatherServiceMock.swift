@@ -13,7 +13,7 @@ class WeatherServiceMock: WeatherServiceProtocol {
     
     func getWeatherForCity(city: String) -> AnyPublisher<WeatherData, WeatherServiceError> {
         
-        return Just(WeatherData(temperature: Double.random(in: 0..<255)))
+        return Just(WeatherData(temperature: Float.random(in: 0..<255)))
             .setFailureType(to: WeatherServiceError.self)
             .eraseToAnyPublisher()
     }
