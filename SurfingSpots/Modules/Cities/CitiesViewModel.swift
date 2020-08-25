@@ -155,12 +155,12 @@ final class CitiesViewModel: ObservableObject {
                 weather = .Cloudy
             }
             
-            temperature = Float(weatherData!.temperature)
+            temperature = weatherData!.temperature
         }
         
         let cityWeatherUpdated =  CityWeather(name: city.name,
                                               image: backgroundImage,
-                                              temperature: Float(temperature),
+                                              temperature: temperature,
                                               weather: weather,
                                               isLoadingImage: loadImage,
                                               isLoadingWeather: false)
