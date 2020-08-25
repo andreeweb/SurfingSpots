@@ -139,7 +139,6 @@ final class CitiesViewModel: ObservableObject {
                                    city: CityWeather) {
         
         var weather = WeatherCondition.NotAvailable
-        let backgroundImage = #imageLiteral(resourceName: "city-placeholder")
         var temperature: Float = .infinity
         var loadImage = false
         
@@ -159,16 +158,16 @@ final class CitiesViewModel: ObservableObject {
         }
         
         let cityWeatherUpdated =  CityWeather(name: city.name,
-                                              image: backgroundImage,
+                                              image: city.image,
                                               temperature: temperature,
                                               weather: weather,
                                               isLoadingImage: loadImage,
                                               isLoadingWeather: false)
-        
-        downloadCityImage(for: cityWeatherUpdated)
-        
+                
         updateCityInList(oldCity: city,
                          updatedCity: cityWeatherUpdated)
+        
+        downloadCityImage(for: cityWeatherUpdated)
     }
     
     /// It download/retrieve the image for the selected city.
@@ -178,7 +177,8 @@ final class CitiesViewModel: ObservableObject {
         
         if city.temperature < temperatureThreshold {
             
-            self.updateCityWithNewImage(image: UIImage(imageLiteralResourceName: "city-cloudy-bg"), city: city)
+            self.updateCityWithNewImage(image: UIImage(imageLiteralResourceName: "city-cloudy-bg"),
+                                        city: city)
             return
         }
         
@@ -217,11 +217,11 @@ final class CitiesViewModel: ObservableObject {
         }
         
         let cityImageUpdated =  CityWeather(name: city.name,
-                                              image: backgroundImage,
-                                              temperature: city.temperature,
-                                              weather: city.weather,
-                                              isLoadingImage: false,
-                                              isLoadingWeather: false)
+                                            image: backgroundImage,
+                                            temperature: city.temperature,
+                                            weather: city.weather,
+                                            isLoadingImage: false,
+                                            isLoadingWeather: false)
         
         updateCityInList(oldCity: city,
                          updatedCity: cityImageUpdated)
@@ -237,9 +237,8 @@ final class CitiesViewModel: ObservableObject {
         // replace in the array
         if let i = cities.firstIndex(where: { $0.name == oldCity.name }) {
             cities[i] = updatedCity
+            reorderList()
         }
-        
-        reorderList()
     }
     
     /// It encapsulete the logic for reorder the cities array in order to have
