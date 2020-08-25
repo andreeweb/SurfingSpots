@@ -42,7 +42,7 @@ struct CityRow: View {
                             .foregroundColor(Color.white)
                     }
                     
-                    if city.temperature == .infinity {
+                    if city.temperature == (-.infinity) {
                         
                         Text(LocalizedStringKey("temperature_placeholder"))
                             .font(.subheadline)

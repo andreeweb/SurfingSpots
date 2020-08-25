@@ -85,7 +85,7 @@ final class CitiesViewModel: ObservableObject {
             
             let name = city.name
             let image = #imageLiteral(resourceName: "city-placeholder")
-            let temperature: Float = .infinity
+            let temperature: Float = (-.infinity)
             let weather = WeatherCondition.NotAvailable
             
             let cityWeather = CityWeather(name: name,
@@ -139,7 +139,7 @@ final class CitiesViewModel: ObservableObject {
                                    city: CityWeather) {
         
         var weather = WeatherCondition.NotAvailable
-        var temperature: Float = .infinity
+        var temperature: Float = (-.infinity)
         var loadImage = false
         
         if weatherData != nil {
