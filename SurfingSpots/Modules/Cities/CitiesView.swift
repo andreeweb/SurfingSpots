@@ -43,7 +43,10 @@ struct CitiesView: View {
                 } else {
                     
                     List(viewModel.cities) { data in
-                        CityRow(city: data)
+                        
+                        NavigationLink(destination: CitiesDetailView(cityWeather: data)) {
+                            CityRow(city: data)
+                        }
                     }
                     .animation(.spring())
                     .navigationBarTitle(Text(LocalizedStringKey("app_name_navigation_bar")))

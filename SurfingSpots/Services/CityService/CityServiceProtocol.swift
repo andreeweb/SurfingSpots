@@ -14,5 +14,7 @@ protocol CityServiceProtocol {
     /// It returns an array of cities.
     ///
     /// - Returns: AnyPublisher<[City], CityServiceError>
-    func getCities() -> AnyPublisher<[City], CityServiceError>
+    // func getCities() -> AnyPublisher<[City], CityServiceError>
+    
+    func getCities(completionHandler: @escaping (Result<[City], CityServiceError>)  -> Void )
 }
